@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Student Index{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1 class="mb-4">Student </h1>
+
+        {% if students is empty %}
+            <div class="alert alert-info" role="alert">
+                No records found.
+            </div>
+        {% else %}
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">NSC</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for student in students %}
+                    <tr>
+                        <td>{{ student.NSC }}</td>
+                        <td>{{ student.Email }}</td>
+                        <td>
+                            <a href="{{ path('app_student_show', {'NSC': student.NSC}) }}" class="btn btn-primary btn-sm me-2">
+                                Show
+                            </a>
+                            <a href="{{ path('app_student_edit', {'NSC': student.NSC}) }}" class="btn btn-secondary btn-sm">
+                                Edit
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        {% endif %}
+
+        <a href="{{ path('app_student_new') }}" class="btn btn-primary mt-4">Create New</a>
+    </div>
+{% endblock %}

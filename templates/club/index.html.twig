@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Club index{% endblock %}
+
+{% block body %}
+<div class="container">
+    <h1 class="my-4">Club </h1>
+
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>REF</th>
+                    <th>CreatedAt</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for club in clubs %}
+                <tr>
+                    <td>{{ club.REF }}</td>
+                    <td>{{ club.CreatedAt ? club.CreatedAt|date('Y-m-d') : '' }}</td>
+                    <td>
+                        <a href="{{ path('app_club_show', {'REF': club.REF}) }}" class="btn btn-primary btn-sm mr-2">Show</a>
+                        <a href="{{ path('app_club_edit', {'REF': club.REF}) }}" class="btn btn-secondary btn-sm">Edit</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="3" class="text-center">No records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <a href="{{ path('app_club_new') }}" class="btn btn-success mt-3">Create new</a>
+</div>
+{% endblock %}

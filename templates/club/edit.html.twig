@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Club{% endblock %}
+
+{% block body %}
+    <div class="container my-5">
+        <h1>Edit Club</h1>
+
+        <form action="{{ path('app_club_edit', {'REF': club.REF}) }}" method="post" class="mt-5">
+            {{ form_start(form) }}
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="{{ form.REF.vars.id }}">REF:</label>
+                    {{ form_widget(form.REF, {'attr': {'class': 'form-control', 'placeholder': 'Enter REF'}}) }}
+                    {{ form_errors(form.REF) }}
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="{{ form.CreatedAt.vars.id }}">CreatedAt:</label>
+                    {{ form_widget(form.CreatedAt, {'attr': {'class': 'form-control', 'placeholder': 'Enter CreatedAt'}}) }}
+                    {{ form_errors(form.CreatedAt) }}
+                </div>
+            </div>
+
+            <div class="text-center mt-5">
+                <button type="submit" class="btn btn-primary">{{ button_label|default('Update') }}</button>
+            </div>
+            {{ form_end(form) }}
+        </form>
+
+        <div class="text-center mt-5">
+            <a href="{{ path('app_club_index') }}" class="btn btn-secondary mx-2">Back to list</a>
+            {{ include('club/_delete_form.html.twig') }}
+        </div>
+    </div>
+{% endblock %}
